@@ -49,7 +49,13 @@ http://127.0.0.1:8000/docs
 ---
 
 ## API Endpoints
-- /jobs
-Get filtered job listings by choosing the parameters you want
-Example:
-![API Docs](screenshots/parameters_filters.JPG)
+## /jobs
+Get filtered job listings by choosing the parameters you want:
+<p align="center">
+  <img src="screenshots/parameters_filters.JPG" height="400"/>
+</p>
+Response:
+  <img src="screenshots/response_search.JPG" height="400"/>
+## /stats
+Get general dataset statistics:
+
