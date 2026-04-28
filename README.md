@@ -52,4 +52,4 @@ http://127.0.0.1:8000/docs
 - /jobs
 Get filtered job listings by choosing the parameters you want
 Example:
-![API Docs](screenshots/parameters_filters.JPG
+![API Docs](screenshots/parameters_filters.JPG)
