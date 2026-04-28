@@ -3,6 +3,7 @@ from fastapi import FastAPI, Query
 from app.data_loader import load_jobs
 from app.filters import filter_jobs
 from app.stats import get_basic_stats, get_city_stats, get_source_stats
+from app.cleaning import clean_html_text, shorten_text
 
 app = FastAPI(
     title="Job Data Backend API",
@@ -25,9 +26,17 @@ def get_jobs(
     df = load_jobs()
     filtered = filter_jobs(df, city, remote, keyword, source)
 
+    jobs = filtered.head(limit).copy()
+
+    if "description" in jobs.columns:
+        jobs["description_preview"] = jobs["description"].apply(
+            lambda text: shorten_text(clean_html_text(text))
+        )
+        jobs = jobs.drop(columns=["description"])
+
     return {
-        "count": len(filtered),
-        "jobs": filtered.head(limit).to_dict(orient="records"),
+        "count": int(len(filtered)),
+        "jobs": jobs.to_dict(orient="records"),
     }
 
 @app.get("/stats")
